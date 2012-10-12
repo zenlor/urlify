@@ -160,5 +160,7 @@ module.exports = function(s, num_chars) {
     .replace(/^\s+|\s+$/g, '')  // trim leading/trailing spaces
     .replace(/[-\s]+/g, '-')    // convert spaces to one hyphen
     .toLowerCase();             // convert to lowercase
-  return s.substring(0, num_chars); // trim to first num_chars chars
+  return (!!num_chars)
+    ? s.substring(0, num_chars).replace(/-$/, '') // trim to first num_chars chars
+    : s
 }
