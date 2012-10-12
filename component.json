@@ -1,0 +1,10 @@
+{
+  "name": "urlify",
+  "repo": "aliem/urlify",
+  "description": "urlify.js taken from Django Admin as component module",
+  "version": "0.0.1",
+  "keywords": ["slug", "URLify", "url", "permalink"],
+  "dependencies": {},
+  "development": {},
+  "scripts": ["index.js"]
+}
