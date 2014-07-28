@@ -124,7 +124,11 @@ var Downcoder = (function() {
   return d;
 })();
 
-var downcode = function(slug) {
+var downcode = typeof ''.normalize === 'function' && 776 === // test ES6 Unicode
+  'ü'.normalize('NFKD').charCodeAt(1) ? function(slug) {    // normalize support
+    return slug.normalize('NFKD').replace(/[\u0300-\u036F]/g, '');
+  }
+: function(slug) {
   var downcoded = ''
     , pieces = slug.match(Downcoder.regex);
 
