@@ -1,5 +1,5 @@
 {
-  "name": "urlify",
+  "name": "urlify.js",
   "version": "0.0.1",
   "description": "normalize UTF strings to ASCII to be url safe",
   "main": "index.js",
