@@ -1,0 +1,31 @@
+{
+  "name": "urlify",
+  "version": "0.0.1",
+  "description": "normalize UTF strings to ASCII to be url safe",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aliem/urlify.git"
+  },
+  "keywords": [
+    "slug",
+    "url",
+    "ulrify"
+  ],
+  "author": "Lorenzo Giuliani <lorenzo@frenzart.com>",
+  "contributors": [
+    "Johan Sundström (http://ecmanaut.blogspot.com/)"
+  ],
+  "license": "BSD-3-Clause",
+  "readmeFilename": "Readme.md",
+  "gitHead": "627f5e2147764b6a8b3b2a5110af7b3b8b223356",
+  "bugs": {
+    "url": "https://github.com/aliem/urlify/issues"
+  },
+  "devDependencies": {
+    "tap": "~0.4.12"
+  }
+}
