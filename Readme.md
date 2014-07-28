@@ -36,6 +36,8 @@ Right now it includes:
 * Polish
 * Latvian
 
+In modern ES6 capable javascript engines like v8, all of Unicode is supported.
+
 # License
 
 Released under DJango own license, watch LICENSE for more information.

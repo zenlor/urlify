@@ -5,7 +5,7 @@ All rights reserved.
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, 
+    1. Redistributions of source code must retain the above copyright notice,
        this list of conditions and the following disclaimer.
     
     2. Redistributions in binary form must reproduce the above copyright 
@@ -107,34 +107,38 @@ var LATIN_MAP = {
  * @private
  * character map precompiler
  */
-var Downcoder = (function(){
-  var d = {};
+var Downcoder = (function() {
+  var d = {}, i, lookup, c;
 
-  d.map = {}
+  d.map = {};
   d.chars = '' ;
-  for(var i in ALL_DOWNCODE_MAPS) {
-    var lookup = ALL_DOWNCODE_MAPS[i]
-    for (var c in lookup) {
-      d.map[c] = lookup[c] ;
+  for (i in ALL_DOWNCODE_MAPS) {
+    lookup = ALL_DOWNCODE_MAPS[i];
+    for (c in lookup) {
+      d.map[c] = lookup[c];
       d.chars += c;
     }
   }
-  d.regex = new RegExp('[' + d.chars + ']|[^' + d.chars + ']+','g');
+  d.regex = new RegExp('[' + d.chars + ']|[^' + d.chars + ']+', 'g');
 
   return d;
 })();
 
-var downcode = function(slug) {
-  var downcoded = ""
+var downcode = typeof ''.normalize === 'function' && 776 === // test ES6 Unicode
+  'ü'.normalize('NFKD').charCodeAt(1) ? function(slug) {    // normalize support
+    return slug.normalize('NFKD').replace(/[\u0300-\u036F]/g, '');
+  }
+: function(slug) {
+  var downcoded = ''
     , pieces = slug.match(Downcoder.regex);
 
   if (pieces) {
     for (var i = 0 ; i < pieces.length ; i++) {
       if (pieces[i].length == 1) {
-        var mapped = Downcoder.map[pieces[i]] ;
+        var mapped = Downcoder.map[pieces[i]];
         if (mapped != null) {
-          downcoded+=mapped;
-          continue ;
+          downcoded += mapped;
+          continue;
         }
       }
       downcoded+=pieces[i];
@@ -143,7 +147,7 @@ var downcode = function(slug) {
     downcoded = slug;
   }
   return downcoded;
-}
+};
 
 /**
  * Makes a string URL frendly
@@ -152,7 +156,7 @@ var downcode = function(slug) {
  * @return {String}            urlified string
  */
 module.exports = function(s, num_chars) {
-  // changes, e.g., "Petty theft" to "petty_theft"
+  // changes, e.g., "Petty theft" to "petty-theft"
   // remove all these words from the string before urlifying
   s = downcode(s)
                                 // if downcode doesn't hit, the char will be stripped here
@@ -162,5 +166,5 @@ module.exports = function(s, num_chars) {
     .toLowerCase();             // convert to lowercase
   return (!!num_chars)
     ? s.substring(0, num_chars).replace(/-$/, '') // trim to first num_chars chars
-    : s
-}
+    : s;
+};
